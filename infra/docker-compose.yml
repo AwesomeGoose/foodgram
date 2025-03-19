@@ -21,7 +21,7 @@ services:
       - foodgram_network
 
   backend:
-    container_name: backend
+    container_name: foodgram_backend
     build: ./backend/
     env_file: .env
     depends_on:
