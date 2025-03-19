@@ -113,14 +113,13 @@ TEMPLATES = [
     },
 ]
 
-LANGUAGE_CODE = "ru-ru"
+LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-CORS_ALLOW_ALL_ORIGINS = True
 
-STATIC_URL = "/backend_static/"
+STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "collected_static"
 
 MEDIA_URL = "/media/"
