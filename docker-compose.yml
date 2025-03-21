@@ -35,16 +35,16 @@ services:
       - foodgram_network
 
   frontend:
-    container_name: foodgram-front
+    container_name: foodgram_front
     build: ./frontend
     volumes:
       - ./frontend/:/app/result_build/
     networks:
       - foodgram_network
 
-  nginx:
-    container_name: foodgram-proxy
-    build: ./nginx/
+  gateway:
+    container_name: foodgram_gateway
+    build: ./infra/
     depends_on:
       - backend
     ports:
