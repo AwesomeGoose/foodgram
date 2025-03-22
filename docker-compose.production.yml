@@ -3,6 +3,10 @@ volumes:
   static:
   media:
 
+networks:
+  foodgram_network:
+    driver: bridge
+
 services:
   db:
     image: postgres:13.10
