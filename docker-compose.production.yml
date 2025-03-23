@@ -2,6 +2,7 @@ volumes:
   pg_data:
   static:
   media:
+  redoc:
   
 networks:
   foodgram_network:
@@ -18,26 +19,26 @@ services:
       - foodgram_network
   backend:
     container_name: foodgram_backend
-    image: awesomegoose/foodgram_backend
+    image: awesomegoose/foodgram_backend:latest
     env_file: .env
     depends_on:
       - db
     volumes:
-      - static:/backend_static
-      - media:/app/media
+      - static:/app/backend_static/
+      - media:/app/media/
+      - redoc:/app/api/docs/
     networks:
       - foodgram_network
   frontend:
     container_name: foodgram_front
-    image: awesomegoose/foodgram_frontend
-    command: cp -r /app/build/. /static/
+    image: awesomegoose/foodgram_frontend:latest
     volumes:
       - ./frontend/:/app/result_build/
     networks:
       - foodgram_network
   gateway:
     container_name: foodgram_gateway
-    image: awesomegoose/foodgram_proxy
+    image: awesomegoose/foodgram_proxy:latest
     depends_on:
       - backend
     ports:
@@ -45,7 +46,8 @@ services:
     volumes:
       - ./frontend/build:/usr/share/nginx/html/
       - static:/usr/share/nginx/html/api/docs/
-      - static:/static/
-      - media:/app/media
+      - static:/var/html/static/
+      - media:/var/html/media/
+      - redoc:/usr/share/nginx/html/api/docs/
     networks:
       - foodgram_network
