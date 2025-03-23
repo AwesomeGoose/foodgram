@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     volumes:
-      - static:/app/backend_static/
+      - static:/app/static/
       - media:/app/media/
       - redoc:/app/api/docs/
     networks:
@@ -42,7 +42,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "8001:80"
+      - 8001:80
     volumes:
       - ./frontend/build:/usr/share/nginx/html/
       - static:/usr/share/nginx/html/api/docs/
