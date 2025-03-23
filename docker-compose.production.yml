@@ -44,7 +44,7 @@ services:
     ports:
       - 8001:80
     volumes:
-      - ./frontend/build:/usr/share/nginx/html/
+      - ../frontend/build:/app/
       - static:/app/static/
       - media:/app/media/
       - redoc:/app/api/docs/
