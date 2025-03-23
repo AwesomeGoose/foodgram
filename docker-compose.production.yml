@@ -33,7 +33,7 @@ services:
     container_name: foodgram_front
     image: awesomegoose/foodgram_frontend:latest
     volumes:
-      - ./frontend/:/app/result_build/
+      - static:/app/static/
     networks:
       - foodgram_network
   gateway:
