@@ -45,9 +45,8 @@ services:
       - 8001:80
     volumes:
       - ./frontend/build:/usr/share/nginx/html/
-      - static:/usr/share/nginx/html/api/docs/
-      - static:/var/html/static/
-      - media:/var/html/media/
-      - redoc:/usr/share/nginx/html/api/docs/
+      - static:/app/static/
+      - media:/app/media/
+      - redoc:/app/api/docs/
     networks:
       - foodgram_network
