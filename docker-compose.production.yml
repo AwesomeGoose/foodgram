@@ -25,14 +25,12 @@ services:
     volumes:
       - static:/backend_static
       - media:/app/media
-    ports:
-      - "8105:8001"
     networks:
       - foodgram_network
   frontend:
     container_name: foodgram_front
     image: awesomegoose/foodgram_frontend
-    command: cp -r /app/build/. /static/static/
+    command: cp -r /app/build/. /static/
     volumes:
       - ./frontend/:/app/result_build/
     networks:
