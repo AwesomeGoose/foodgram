@@ -12,7 +12,10 @@ class Base64ImageField(serializers.ImageField):
                 metadata, encoded = data.split(";base64,")
                 extension = metadata.rsplit("/", 1)[-1]
                 binary_data = base64.b64decode(encoded)
-                data = ContentFile(binary_data, name=f"uploaded_image.{extension}")
+                data = ContentFile(binary_data,
+                                   name=f"uploaded_image.{extension}")
             except Exception:
-                raise serializers.ValidationError("Ошибка обработки изображения")
+                raise serializers.ValidationError(
+                    "Ошибка обработки изображения"
+                )
         return super().to_internal_value(data)

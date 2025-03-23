@@ -27,8 +27,10 @@ class UserAdmin(DjangoUserAdmin, EmptyValueMixin):
     ordering = ("-date_joined",)
     fieldsets = [
         (None, {"fields": ["username", "password"]}),
-        ("Личная информация", {"fields": ["first_name", "last_name", "email"]}),
-        ("Права доступа", {"fields": ["is_active", "is_staff", "is_superuser"]}),
+        ("Личная информация", {
+            "fields": ["first_name", "last_name", "email"]}),
+        ("Права доступа", {
+            "fields": ["is_active", "is_staff", "is_superuser"]}),
         ("Активность", {"fields": ["last_login", "date_joined"]}),
     ]
     add_fieldsets = [

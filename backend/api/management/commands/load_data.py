@@ -20,7 +20,9 @@ class Command(BaseCommand):
         for model, filename in DATA_FILES.items():
             file_path = base_path / filename
             if not file_path.exists():
-                self.stderr.write(self.style.ERROR(f"Файл {filename} не найден"))
+                self.stderr.write(
+                    self.style.ERROR(f"Файл {filename} не найден")
+                )
                 continue
 
             try:
@@ -32,13 +34,13 @@ class Command(BaseCommand):
                         except IntegrityError as error:
                             self.stderr.write(
                                 self.style.ERROR(
-                                    f"Ошибка при добавлении записи в {model.__name__}: {error}"
+                                    f"Ошибка при добавлении записи: {error}"
                                 )
                             )
                 self.stdout.write(
-                    self.style.SUCCESS(f"Данные для {model.__name__} успешно загружены")
+                    self.style.SUCCESS("Данные успешно загружены")
                 )
             except Exception as error:
                 self.stderr.write(
-                    self.style.ERROR(f"Произошла ошибка при обработке {filename}: {error}")
+                    self.style.ERROR(f"Произошла ошибка: {error}")
                 )

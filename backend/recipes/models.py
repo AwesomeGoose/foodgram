@@ -111,7 +111,8 @@ class Recipe(models.Model):
         validators=[
             MinValueValidator(
                 MIN_COOKING_TIME,
-                _("Минимальное время приготовления должно быть не менее 1 минуты"),
+                _("Минимальное время приготовления"
+                  " должно быть не менее 1 минуты"),
             )
         ],
         help_text=_("Укажите время приготовления в минутах"),
@@ -146,12 +147,13 @@ class Recipe(models.Model):
 
     def generate_short_code(self):
         while True:
-            code = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+            code = ''.join(random.choices(
+                string.ascii_letters + string.digits, k=8))
             if not Recipe.objects.filter(short_code=code).exists():
                 return code
 
     def save(self, *args, **kwargs):
-        if not self.short_code:  # Генерируем код только при создании
+        if not self.short_code:
             self.short_code = self.generate_short_code()
         super().save(*args, **kwargs)
 
@@ -179,7 +181,8 @@ class RecipeIngredient(models.Model):
         verbose_name=_("Количество"),
         validators=[
             MinValueValidator(
-                MIN_ING_AMOUNT, _("Минимальное количество должно быть больше 0")
+                MIN_ING_AMOUNT, _(
+                    "Минимальное количество должно быть больше 0")
             )
         ],
         help_text=_("Укажите количество ингредиента"),

@@ -12,7 +12,9 @@ class RecipeFilter(FilterSet):
     is_in_shopping_cart = BooleanFilter(method="get_shopping_cart")
     is_favorited = BooleanFilter(method="get_favorite")
     tags = ModelMultipleChoiceFilter(
-        field_name="tags__slug", to_field_name="slug", queryset=Tag.objects.all()
+        field_name="tags__slug",
+        to_field_name="slug",
+        queryset=Tag.objects.all()
     )
 
     def get_shopping_cart(self, queryset, _, value):

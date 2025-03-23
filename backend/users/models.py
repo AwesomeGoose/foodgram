@@ -19,7 +19,9 @@ class User(AbstractUser):
     )
     first_name = models.CharField(_("Имя"), max_length=MAX_LEN_NAME)
     last_name = models.CharField(_("Фамилия"), max_length=MAX_LEN_NAME)
-    email = models.EmailField(_("Email"), max_length=MAX_LEN_EMAIL, unique=True)
+    email = models.EmailField(_("Email"),
+                              max_length=MAX_LEN_EMAIL,
+                              unique=True)
     avatar = models.ImageField(
         _("Аватар"),
         upload_to="users/",

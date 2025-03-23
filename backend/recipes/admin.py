@@ -20,7 +20,8 @@ class RecipeAdmin(admin.ModelAdmin):
     ordering = ("-id",)
 
     def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related("favorites", "tags")
+        return super().get_queryset(request).prefetch_related(
+            "favorites", "tags")
 
     @admin.display(description="В избранных")
     def favorite_count(self, obj):
