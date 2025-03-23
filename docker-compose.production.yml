@@ -24,8 +24,8 @@ services:
     depends_on:
       - db
     volumes:
-      - static:/app/static/
-      - media:/app/media/
+      - static:/app/web
+      - media:/app/media
       - redoc:/app/api/docs/
     networks:
       - foodgram_network
@@ -33,8 +33,8 @@ services:
     container_name: foodgram_front
     image: awesomegoose/foodgram_frontend:latest
     volumes:
-      - static:/app/
-    command: cp -r /app/build/. /app/
+      - static:/app/frontend_static
+    command: cp -r /app/build/. /app/frontend_static
     networks:
       - foodgram_network
   gateway:
@@ -45,9 +45,8 @@ services:
     ports:
       - 8001:80
     volumes:
-      - ./frontend/build:/app/
-      - static:/app/static/
-      - media:/app/media/
-      - redoc:/app/api/docs/
+      - static:/web
+      - media:/web/media
+      - redoc:/app/api/docs
     networks:
       - foodgram_network
