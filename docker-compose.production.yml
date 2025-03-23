@@ -2,34 +2,52 @@ volumes:
   pg_data:
   static:
   media:
-
+  
 networks:
   foodgram_network:
     driver: bridge
 
 services:
   db:
+    container_name: db
     image: postgres:13.10
     env_file: .env
     volumes:
-      - pg_data:/var/lib/postgresql/data/
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - foodgram_network
   backend:
+    container_name: foodgram_backend
     image: awesomegoose/foodgram_backend
     env_file: .env
+    depends_on:
+      - db
     volumes:
-      - static:/static
-      - media:/app/media/
+      - static:/backend_static
+      - media:/app/media
+    ports:
+      - "8105:8001"
+    networks:
+      - foodgram_network
   frontend:
+    container_name: foodgram_front
     image: awesomegoose/foodgram_frontend
-    env_file: .env
     command: cp -r /app/build/. /static/static/
     volumes:
-      - static:/static
+      - ./frontend/:/app/result_build/
+    networks:
+      - foodgram_network
   gateway:
+    container_name: foodgram_gateway
     image: awesomegoose/foodgram_proxy
-    env_file: .env
-    volumes:
-      - static:/static
-      - media:/app/media/
+    depends_on:
+      - backend
     ports:
-      - 8001:80
+      - "8001:80"
+    volumes:
+      - ./frontend/build:/usr/share/nginx/html/
+      - static:/usr/share/nginx/html/api/docs/
+      - static:/static/
+      - media:/app/media
+    networks:
+      - foodgram_network
